@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "2d8e4354-b29c-4436-b92e-8f38843aaacc",
+		"name": "CakeManagerTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29461975"
+	},
+	"item": [
+		{
+			"name": "list all cakes",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tempdevPassw@rd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tempdev",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cakes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cakes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add a cake",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tempdevPassw@rd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tempdev",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"title\": \"Brand new cake\",\r\n        \"description\": \"A cake made out of JSON\",\r\n        \"image\": \"https://s3-eu-west-1.amazonaws.com/s3.mediafileserver.co.uk/carnation/WebFiles/RecipeImages/jsonCake.jpg\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/cakes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cakes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a cake",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tempdevPassw@rd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tempdev",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"title\": \"Lemon cheesecake UPDATE\",\r\n        \"description\": \"A cheesecake made of lemon and other things\",\r\n        \"image\": \"https://s3-eu-west-1.amazonaws.com/s3.mediafileserver.co.uk/carnation/WebFiles/RecipeImages/lemoncheesecake_lg.jpg\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/cakes/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cakes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update a cake",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tempdevPassw@rd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tempdev",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cakes/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cakes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

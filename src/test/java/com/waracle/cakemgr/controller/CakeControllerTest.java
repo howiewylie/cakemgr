@@ -1,5 +1,8 @@
 package com.waracle.cakemgr.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.waracle.cakemgr.entity.Cake;
 import com.waracle.cakemgr.service.CakeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.Mockito.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,13 +50,13 @@ public class CakeControllerTest {
     public void testGetCakesSuccess() throws Exception {
         List<Cake> cakeList = new ArrayList<>();
         Cake cake1 = Cake.builder()
-                .cakeId(1)
+                .cakeId(1L)
                 .title("Cake1")
                 .description("Nice cake")
                 .image("cake1ImgUrl")
                 .build();
         Cake cake2 = Cake.builder()
-                .cakeId(2)
+                .cakeId(2L)
                 .title("Cake2")
                 .description("Nice cake too")
                 .image("cake2ImgUrl")
@@ -76,15 +80,56 @@ public class CakeControllerTest {
                 .image("cake2ImgUrl")
                 .build();
 
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(cake );
+
         Cake newCake = Cake.builder()
-                .cakeId(1)
+                .cakeId(1L)
                 .title(cake.getTitle())
                 .description(cake.getDescription())
                 .image(cake.getImage())
                 .build();
         when(cakeService.addCake(cake)).thenReturn(newCake);
-        mockMvc.perform(get("/cakes"))
-                .andExpect(status().isOk());
+        mockMvc.perform(post("/cakes").contentType(APPLICATION_JSON_UTF8).content(requestJson))
+                .andExpect(status().is2xxSuccessful());
+
+    }
+
+    @Test
+    public void testEditCakesSuccess() throws Exception {
+
+        Cake cake = Cake.builder()
+                .cakeId(1L)
+                .title("Cake2")
+                .description("Nice cake too")
+                .image("cake2ImgUrl")
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson=ow.writeValueAsString(cake );
+
+        Cake newCake = Cake.builder()
+                .cakeId(cake.getCakeId())
+                .title(cake.getTitle())
+                .description(cake.getDescription())
+                .image(cake.getImage())
+                .build();
+        when(cakeService.updateCake(cake,cake.getCakeId())).thenReturn(newCake);
+        mockMvc.perform(put("/cakes/1").contentType(APPLICATION_JSON_UTF8).content(requestJson))
+                .andExpect(status().is2xxSuccessful());
+
+    }
+
+    @Test
+    public void testDeleteCakeSuccess() throws Exception {
+
+        mockMvc.perform(delete("/cakes/1"))
+                .andExpect(status().is2xxSuccessful());
+        verify(cakeService).removeCake(1L);
 
     }
 

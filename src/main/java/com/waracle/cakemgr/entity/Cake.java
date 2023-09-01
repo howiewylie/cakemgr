@@ -21,7 +21,7 @@ public class Cake implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
-    private Integer cakeId;
+    private Long cakeId;
 
     @Setter
     @Column(name = "TITLE", unique = true, nullable = false, length = 100)

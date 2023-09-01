@@ -19,12 +19,13 @@ public class CakeController {
 
     @GetMapping("/cakes")
     Iterable<Cake> listAllCakes() {
-        logger.info("An INFO Message");
+        logger.info("In listAllCakes");
         return cakeService.getCakes();
     }
 
     @PostMapping("/cakes")
     public ResponseEntity<Cake> createCake(@RequestBody Cake cake) {
+        logger.info("In createCake");
         try {
         Cake newCake = cakeService.addCake(cake);
         return new ResponseEntity<>(newCake, HttpStatus.CREATED);
@@ -35,6 +36,7 @@ public class CakeController {
 
     @PutMapping("/cakes/{id}")
     public ResponseEntity<Cake> updateCake(@RequestBody Cake cake, @PathVariable Long id) {
+        logger.info("In updateCake");
         try {
             Cake updatedCake = cakeService.updateCake(cake, id);
             return new ResponseEntity<>(updatedCake, HttpStatus.CREATED);
@@ -43,8 +45,9 @@ public class CakeController {
         }
     }
 
-    @DeleteMapping("/cakes")
+    @DeleteMapping("/cakes/{id}")
     public void deleteCake(@PathVariable Long id) {
+        logger.info("In deleteCake");
         cakeService.removeCake(id);
     }
 }

@@ -1,8 +1,4 @@
 spring:
-  security:
-    user:
-      name: tempdev
-      password: tempdevPassw@rd
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa

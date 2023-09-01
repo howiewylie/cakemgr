@@ -1,0 +1,5 @@
+spring:
+  security:
+    user:
+      name: tempdev
+      password: tempdevPassw@rd

@@ -39,7 +39,7 @@ public class CakeServiceTest {
                 .build();
 
         Cake newCake = Cake.builder()
-                .cakeId(1)
+                .cakeId(1L)
                 .title(cake.getTitle())
                 .description(cake.getDescription())
                 .image(cake.getImage())
@@ -52,13 +52,20 @@ public class CakeServiceTest {
     @Test
     public void testUpdateCake() {
         Cake cake = Cake.builder()
-                .cakeId(1)
+                .cakeId(1L)
                 .title("TestTitle")
                 .description("TestDescription")
                 .image("ImgUrl")
                 .build();
         when(cakeRepo.save(cake)).thenReturn(cake);
-        cakeService.addCake(cake);
+        cakeService.updateCake(cake, cake.getCakeId());
+        verify(cakeRepo).findById(cake.getCakeId());
         verify(cakeRepo).save(cake);
+    }
+
+    @Test
+    public void testRemoveCake() {
+        cakeService.removeCake(1L);
+        verify(cakeRepo).deleteById(1L);
     }
 }
