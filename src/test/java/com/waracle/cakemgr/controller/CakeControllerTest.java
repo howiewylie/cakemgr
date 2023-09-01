@@ -2,23 +2,19 @@ package com.waracle.cakemgr.controller;
 
 import com.waracle.cakemgr.entity.Cake;
 import com.waracle.cakemgr.service.CakeService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -48,7 +44,7 @@ public class CakeControllerTest {
 
     @Test
     public void testGetCakesSuccess() throws Exception {
-        List<Cake> cakeList = new ArrayList<Cake>();
+        List<Cake> cakeList = new ArrayList<>();
         Cake cake1 = Cake.builder()
                 .cakeId(1)
                 .title("Cake1")

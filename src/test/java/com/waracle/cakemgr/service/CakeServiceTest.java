@@ -24,7 +24,7 @@ public class CakeServiceTest {
 
     @Test
     public void testGetCakes() {
-        when(cakeRepo.findAll()).thenReturn(new ArrayList<Cake>());
+        when(cakeRepo.findAll()).thenReturn(new ArrayList<>());
         Iterable<Cake> cakeList = cakeService.getCakes();
         assertNotNull(cakeList);
         verify(cakeRepo).findAll();

@@ -28,9 +28,7 @@ public class CakeService {
                     c.setImage(cake.getImage());
                     return repo.save(c);
                 })
-                .orElseGet(() -> {
-                    return repo.save(cake);
-                });
+                .orElseGet(() -> repo.save(cake));
     }
     public void removeCake(Long id) {
         repo.deleteById(id);

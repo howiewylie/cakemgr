@@ -2,6 +2,8 @@ package com.waracle.cakemgr.controller;
 
 import com.waracle.cakemgr.entity.Cake;
 import com.waracle.cakemgr.service.CakeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +12,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class CakeController {
 
+    Logger logger = LoggerFactory.getLogger(CakeController.class);
+
     @Autowired
     CakeService cakeService;
 
     @GetMapping("/cakes")
     Iterable<Cake> listAllCakes() {
+        logger.info("An INFO Message");
         return cakeService.getCakes();
     }
 
@@ -28,7 +33,7 @@ public class CakeController {
         }
     }
 
-    @PutMapping("/cakes")
+    @PutMapping("/cakes/{id}")
     public ResponseEntity<Cake> updateCake(@RequestBody Cake cake, @PathVariable Long id) {
         try {
             Cake updatedCake = cakeService.updateCake(cake, id);

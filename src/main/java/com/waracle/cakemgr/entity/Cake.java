@@ -1,12 +1,11 @@
 package com.waracle.cakemgr.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,22 +21,18 @@ public class Cake implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
-    @Getter
     private Integer cakeId;
 
-    @Getter
     @Setter
     @Column(name = "TITLE", unique = true, nullable = false, length = 100)
     private String title;
 
-    @Getter
     @Setter
-    @Column(name = "DESCRIPTION", unique = false, nullable = false, length = 100)
+    @Column(name = "DESCRIPTION", nullable = false, length = 100)
     private String description;
 
-    @Getter
     @Setter
-    @Column(name = "IMAGE", unique = false, nullable = false, length = 300)
+    @Column(name = "IMAGE", nullable = false, length = 300)
     private String image;
 
 }
